@@ -1,0 +1,2601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Singh Capital Partners — Intelligent Capital. Enduring Impact.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-primary: #1A1A1A;
+            --color-secondary: #2D2D2D;
+            --color-accent: #8B7355;
+            --color-accent-light: #A89080;
+            --color-accent-dark: #6B5645;
+            --color-text: #1A1A1A;
+            --color-text-light: #5A5A5A;
+            --color-text-lighter: #8A8A8A;
+            --color-background: #FAF8F5;
+            --color-background-alt: #F5F2ED;
+            --color-background-cream: #FFFDF9;
+            --color-white: #FFFFFF;
+            --color-border: #E8E4DD;
+            --color-border-light: #F0EDE6;
+            
+            --font-display: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            
+            --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-fast: all 0.2s ease;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--color-text);
+            background: var(--color-background);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: var(--transition-smooth);
+        }
+
+        nav::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid transparent;
+            transition: var(--transition-smooth);
+        }
+
+        nav.scrolled::before {
+            border-bottom-color: var(--color-border);
+            box-shadow: 0 1px 10px rgba(0, 0, 0, 0.03);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.75rem 3rem;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            position: relative;
+        }
+
+        nav.scrolled .nav-container {
+            padding: 1.25rem 3rem;
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+            transition: var(--transition-smooth);
+            position: relative;
+            grid-column: 2;
+            text-align: center;
+        }
+
+        .logo:hover {
+            color: var(--color-accent);
+        }
+
+        .nav-left {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+            justify-self: start;
+        }
+
+        .nav-right {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+            justify-self: end;
+        }
+
+        .nav-left a,
+        .nav-right a {
+            color: var(--color-text);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            letter-spacing: 0.01em;
+            transition: var(--transition-smooth);
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-left a::after,
+        .nav-right a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--color-accent);
+            transition: var(--transition-smooth);
+        }
+
+        .nav-left a:hover,
+        .nav-right a:hover {
+            color: var(--color-accent);
+        }
+
+        .nav-left a:hover::after,
+        .nav-right a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--color-background-cream);
+            position: relative;
+            padding: 10rem 3rem 6rem;
+            border-bottom: 1px solid var(--color-border);
+            overflow: hidden;
+        }
+
+        /* Hero Background Video */
+        .hero-video-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .hero-video-bg video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .hero-video-bg video.active {
+            opacity: 1;
+        }
+
+        /* Cream Overlay - keeps text readable */
+        .hero-video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                rgba(255, 253, 249, 0.82) 0%,
+                rgba(250, 248, 245, 0.72) 50%,
+                rgba(255, 253, 249, 0.82) 100%
+            );
+            z-index: 1;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            text-align: center;
+            position: relative;
+            z-index: 5;
+        }
+
+        .hero h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 400;
+            color: var(--color-primary);
+            margin-bottom: 4rem;
+            line-height: 1.3;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 4rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding-top: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--color-primary);
+            display: block;
+            margin-bottom: 0.75rem;
+            line-height: 1;
+            letter-spacing: -0.02em;
+        }
+
+        .stat-label {
+            color: var(--color-text-light);
+            font-size: 0.875rem;
+            font-weight: 500;
+            line-height: 1.4;
+            letter-spacing: 0.01em;
+        }
+
+        .hero-visual {
+            display: none;
+        }
+
+        .hero-eyebrow {
+            display: none;
+        }
+
+        .hero-subtitle {
+            display: none;
+        }
+
+        .hero-cta {
+            display: none;
+        }
+
+        .hero-decoration {
+            display: none;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 6rem 3rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-label {
+            color: var(--color-accent);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 500;
+            color: var(--color-primary);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+
+        .section-description {
+            font-size: 1.15rem;
+            color: var(--color-text-light);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* Approach Grid */
+        .approach-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .approach-card {
+            padding: 2rem;
+            background: var(--color-white);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            transition: var(--transition-smooth);
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .approach-card:hover {
+            border-color: var(--color-accent);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        .approach-card.expanded {
+            border-color: var(--color-accent);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .approach-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .approach-card h3 {
+            font-family: var(--font-display);
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: var(--color-primary);
+            margin: 0;
+            flex: 1;
+        }
+
+        .expand-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--color-background);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--color-accent);
+            transition: var(--transition-smooth);
+            flex-shrink: 0;
+        }
+
+        .approach-card.expanded .expand-icon {
+            background: var(--color-accent);
+            color: var(--color-white);
+            transform: rotate(45deg);
+        }
+
+        .approach-card-content {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
+                        opacity 0.4s ease,
+                        margin-top 0.5s ease;
+        }
+
+        .approach-card.expanded .approach-card-content {
+            max-height: 500px;
+            opacity: 1;
+            margin-top: 1.5rem;
+        }
+
+        .approach-card p {
+            color: var(--color-text-light);
+            line-height: 1.8;
+            margin: 0;
+        }
+
+        /* Portfolio Filter */
+        .portfolio-filter {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.75rem 1.75rem;
+            background: var(--color-white);
+            border: 2px solid var(--color-border);
+            border-radius: 50px;
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--color-text);
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .filter-btn:hover {
+            border-color: var(--color-accent);
+            color: var(--color-accent-dark);
+        }
+
+        .filter-btn.active {
+            background: var(--color-accent);
+            border-color: var(--color-accent);
+            color: var(--color-white);
+        }
+
+        /* Portfolio Grid */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .portfolio-item {
+            background: var(--color-white);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            transition: var(--transition-smooth);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .portfolio-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--color-accent);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: var(--transition-smooth);
+        }
+
+        .portfolio-item:hover::before {
+            transform: scaleX(1);
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+            border-color: var(--color-accent);
+        }
+
+        .portfolio-item img {
+            max-width: 120px;
+            max-height: 50px;
+            object-fit: contain;
+            margin-bottom: 1rem;
+            filter: grayscale(1) opacity(0.7);
+            transition: var(--transition-fast);
+        }
+
+        .portfolio-item:hover img {
+            filter: grayscale(0) opacity(1);
+        }
+
+        .portfolio-item .company-name {
+            font-weight: 600;
+            color: var(--color-primary);
+            font-size: 0.95rem;
+            margin-top: 0.5rem;
+        }
+
+        .portfolio-item .stage-tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: var(--color-background);
+            border-radius: 20px;
+            font-size: 0.75rem;
+            color: var(--color-text-light);
+            margin-top: 0.75rem;
+            font-weight: 500;
+        }
+
+        /* Real Estate Grid */
+        .real-estate-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .property-card {
+            background: var(--color-white);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: var(--transition-smooth);
+            border: 1px solid var(--color-border);
+        }
+
+        .property-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .property-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-primary) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-white);
+            font-size: 3rem;
+            font-family: var(--font-display);
+        }
+
+        .property-info {
+            padding: 2rem;
+        }
+
+        .property-type {
+            color: var(--color-accent);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .property-name {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--color-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .property-location {
+            color: var(--color-text-light);
+            font-size: 0.95rem;
+        }
+
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .contact-card {
+            background: var(--color-white);
+            padding: 3rem;
+            border-radius: 12px;
+            border: 1px solid var(--color-border);
+            transition: var(--transition-smooth);
+        }
+
+        .contact-card:hover {
+            border-color: var(--color-accent);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .contact-card h3 {
+            font-family: var(--font-display);
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: var(--color-primary);
+            margin-bottom: 1rem;
+        }
+
+        .contact-card p {
+            color: var(--color-text-light);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .contact-card a {
+            color: var(--color-accent-dark);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition-fast);
+        }
+
+        .contact-card a:hover {
+            color: var(--color-accent);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--color-background);
+            color: var(--color-text-light);
+            padding: 3rem;
+            text-align: center;
+            border-top: 1px solid var(--color-border);
+        }
+
+        footer p {
+            font-size: 0.875rem;
+        }
+
+        /* Scroll Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Hidden class for filtering */
+        .hidden {
+            display: none !important;
+        }
+
+        /* Portfolio Modal */
+        .portfolio-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(26, 26, 26, 0.7);
+            backdrop-filter: blur(8px);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            padding: 2rem;
+        }
+
+        .portfolio-modal.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .modal-content {
+            background: var(--color-white);
+            border-radius: 16px;
+            max-width: 600px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .portfolio-modal.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            padding: 2.5rem 2.5rem 1.5rem;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--color-background);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--color-text);
+            transition: var(--transition-fast);
+        }
+
+        .modal-close:hover {
+            background: var(--color-accent);
+            color: var(--color-white);
+            transform: rotate(90deg);
+        }
+
+        .modal-company-name {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--color-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-stage {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            background: var(--color-accent);
+            color: var(--color-white);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: capitalize;
+        }
+
+        .modal-body {
+            padding: 2rem 2.5rem 2.5rem;
+        }
+
+        .modal-detail-item {
+            margin-bottom: 1.75rem;
+        }
+
+        .modal-detail-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .modal-detail-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-accent);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-detail-value {
+            color: var(--color-text);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        .modal-detail-value a {
+            color: var(--color-accent-dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition-fast);
+        }
+
+        .modal-detail-value a:hover {
+            color: var(--color-accent);
+            text-decoration: underline;
+        }
+
+        .modal-detail-value ul {
+            margin: 0;
+            padding-left: 1.25rem;
+        }
+
+        .modal-detail-value li {
+            margin-bottom: 0.5rem;
+            color: var(--color-text-light);
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .hero {
+                padding: 8rem 2rem 5rem;
+                min-height: 80vh;
+            }
+
+            .hero h1 {
+                font-size: clamp(2rem, 6vw, 3rem);
+                margin-bottom: 3rem;
+            }
+
+            .hero-stats {
+                gap: 2.5rem;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+
+            .stat-label {
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 1.5rem 1.5rem;
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            nav.scrolled .nav-container {
+                padding: 1rem 1.5rem;
+            }
+
+            .logo {
+                grid-column: 1;
+                font-size: 1.1rem;
+                order: -1;
+            }
+
+            .nav-left,
+            .nav-right {
+                justify-self: center;
+                gap: 1.5rem;
+            }
+
+            .nav-left {
+                order: 1;
+            }
+
+            .nav-right {
+                order: 2;
+            }
+
+            .nav-left a,
+            .nav-right a {
+                font-size: 0.8rem;
+            }
+
+            .hero {
+                padding: 7rem 1.5rem 4rem;
+                min-height: auto;
+            }
+
+            .hero h1 {
+                font-size: clamp(1.75rem, 7vw, 2.5rem);
+                margin-bottom: 2.5rem;
+            }
+
+            .hero-stats {
+                gap: 2rem;
+                flex-direction: column;
+                max-width: 300px;
+                margin: 0 auto;
+            }
+
+            .stat-item {
+                display: flex;
+                justify-content: space-between;
+                align-items: baseline;
+                width: 100%;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+
+            .stat-label {
+                font-size: 0.85rem;
+                text-align: right;
+            }
+
+            section {
+                padding: 4rem 1.5rem;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 1.5rem;
+            }
+
+            .real-estate-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-content {
+                margin: 1rem;
+            }
+
+            .modal-header {
+                padding: 2rem 2rem 1.25rem;
+            }
+
+            .modal-body {
+                padding: 1.5rem 2rem 2rem;
+            }
+
+            .modal-company-name {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <ul class="nav-left">
+                <li><a href="#approach">Approach</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+            </ul>
+            <a href="#" class="logo">Singh Capital</a>
+            <ul class="nav-right">
+                <li><a href="#real-estate">Real Estate</a></li>
+                <li><a href="#contact">Connect</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <!-- Background Video -->
+        <div class="hero-video-bg">
+            <video id="heroVideo" class="active" autoplay muted loop playsinline preload="auto" webkit-playsinline>
+                <source src="https://aenfd9l0jo1i5cam.public.blob.vercel-storage.com/SCP_WEBSITE%20VIDEO.mov" type="video/mp4">
+                <source src="https://aenfd9l0jo1i5cam.public.blob.vercel-storage.com/SCP_WEBSITE%20VIDEO.mov" type="video/quicktime">
+            </video>
+        </div>
+        
+        <!-- Cream Overlay -->
+        <div class="hero-video-overlay"></div>
+        
+        <!-- Hero Text Content -->
+        <div class="hero-content">
+            <h1>Intelligent Capital. Enduring Impact.</h1>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number">100+</span>
+                    <span class="stat-label">Portfolio Companies</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">$2B+</span>
+                    <span class="stat-label">Capital Deployed</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">15+</span>
+                    <span class="stat-label">Years Investing</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">5</span>
+                    <span class="stat-label">Asset Classes</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Approach Section -->
+    <section id="approach">
+        <div class="section-header fade-in">
+            <div class="section-label">Our Approach</div>
+            <h2>Disciplined. Strategic. Long-Term.</h2>
+            <p class="section-description">
+                We combine institutional rigor with entrepreneurial agility, investing across private markets to build companies, assets, and communities that endure.
+            </p>
+        </div>
+        <div class="approach-grid">
+            <div class="approach-card fade-in">
+                <div class="approach-card-header">
+                    <h3>Venture & Growth</h3>
+                    <div class="expand-icon">+</div>
+                </div>
+                <div class="approach-card-content">
+                    <p>Partnering with visionary founders in technology, healthcare, and industrial innovation—combining strategic insight and operational support to scale transformative companies.</p>
+                </div>
+            </div>
+            <div class="approach-card fade-in">
+                <div class="approach-card-header">
+                    <h3>Private Equity & Roll-Ups</h3>
+                    <div class="expand-icon">+</div>
+                </div>
+                <div class="approach-card-content">
+                    <p>Acquiring and scaling proven businesses through buy-and-build strategies, unlocking operational efficiency and compounding enterprise value.</p>
+                </div>
+            </div>
+            <div class="approach-card fade-in">
+                <div class="approach-card-header">
+                    <h3>Real Assets</h3>
+                    <div class="expand-icon">+</div>
+                </div>
+                <div class="approach-card-content">
+                    <p>Targeting resilient commercial and mixed-use properties in growth markets, emphasizing strategic location, strong cash flow, and responsible stewardship.</p>
+                </div>
+            </div>
+            <div class="approach-card fade-in">
+                <div class="approach-card-header">
+                    <h3>Funds & Co-Investments</h3>
+                    <div class="expand-icon">+</div>
+                </div>
+                <div class="approach-card-content">
+                    <p>Investing alongside top-tier fund managers globally, with emphasis on governance, alignment, and consistent long-term performance.</p>
+                </div>
+            </div>
+            <div class="approach-card fade-in">
+                <div class="approach-card-header">
+                    <h3>Civic Engagement</h3>
+                    <div class="expand-icon">+</div>
+                </div>
+                <div class="approach-card-content">
+                    <p>Guided by Sikh principles of Seva, supporting education, inclusion, and policy initiatives that align purpose with prosperity.</p>
+                </div>
+            </div>
+            <div class="approach-card fade-in">
+                <div class="approach-card-header">
+                    <h3>Government Affairs</h3>
+                    <div class="expand-icon">+</div>
+                </div>
+                <div class="approach-card-content">
+                    <p>Engaging in strategic policy advocacy and partnerships to shape impactful legislation and foster civic progress.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio">
+        <div class="section-header fade-in">
+            <div class="section-label">Portfolio</div>
+            <h2>Building the Future</h2>
+            <p class="section-description">
+                Our portfolio spans the innovation economy—from early-stage ventures to scaled enterprises across technology, healthcare, consumer, and industrial sectors.
+            </p>
+        </div>
+
+        <div class="portfolio-filter">
+            <button class="filter-btn active" data-filter="all">All Companies</button>
+            <button class="filter-btn" data-filter="venture">Venture</button>
+            <button class="filter-btn" data-filter="growth">Growth</button>
+            <button class="filter-btn" data-filter="funds">Funds</button>
+        </div>
+
+        <div class="portfolio-grid" id="portfolioGrid">
+            <!-- Venture Stage Companies -->
+            <div class="portfolio-item fade-in" data-category="venture" data-company-id="groq">
+                <div class="company-name">Groq</div>
+                <span class="stage-tag">Venture</span>
+            </div>
+            <div class="portfolio-item fade-in" data-category="venture" data-company-id="humata">
+                <div class="company-name">Humata</div>
+                <span class="stage-tag">Venture</span>
+            </div>
+            <div class="portfolio-item fade-in" data-category="venture" data-company-id="zeroeyes">
+                <div class="company-name">ZeroEyes</div>
+                <span class="stage-tag">Venture</span>
+            </div>
+            <div class="portfolio-item fade-in" data-category="venture" data-company-id="bricklayerai">
+                <div class="company-name">Bricklayer AI</div>
+                <span class="stage-tag">Venture</span>
+            </div>
+            <div class="portfolio-item fade-in" data-category="venture" data-company-id="moonlite">
+                <div class="company-name">Moonlite</div>
+                <span class="stage-tag">Venture</span>
+            </div>
+            <div class="portfolio-item fade-in" data-category="venture" data-company-id="brelle">
+                <div class="company-name">Brelle</div>
+                <span class="stage-tag">Venture</span>
+            </div>
+            <div class="portfolio-item fade-in" data-category="venture" data-company-id="metamap">
+                <div class="company-name">MetaMap</div>
+                <span class="stage-tag">Venture</span>
+            </div>
+            <div class="portfolio-item fade-in" data-category="venture" data-company-id="blackcrowai">
+                <div class="company-name">BlackCrow AI</div>
+                <span class="stage-tag">Venture</span>
+            </div>
+            <div class="portfolio-item fade-in" data-category="venture" data-company-id="arintra">
+                <div class="company-name">Arintra</div>
+                <span class="stage-tag">Venture</span>
+            </div>
+            <div class="portfolio-item fade-in" data-category="venture" data-company-id="instylla">
+                <div class="company-name">Instylla</div>
+                <span class="stage-tag">Venture</span>
+            </div>
+            <div class="portfolio-item fade-in" data-category="venture" data-company-id="tennissocial">
+                <div class="company-name">TennisSocial AI</div>
+                <span class="stage-tag">Venture</span>
+            </div>
+            <div class="portfolio-item fade-in" data-category="venture" data-company-id="sightly">
+                <div class="company-name">Sightly</div>
+                <span class="stage-tag">Venture</span>
+            </div>
+            <div class="portfolio-item fade-in" data-category="venture" data-company-id="point">
+                <div class="company-name">Point</div>
+                <span class="stage-tag">Venture</span>
+            </div>
+            <div class="portfolio-item fade-in" data-category="venture" data-company-id="tailos">
+                <div class="company-name">Tailos</div>
+                <span class="stage-tag">Venture</span>
+            </div>
+            <div class="portfolio-item fade-in" data-category="venture" data-company-id="incued">
+                <div class="company-name">Incued</div>
+                <span class="stage-tag">Venture</span>
+            </div>
+            <div class="portfolio-item fade-in" data-category="venture" data-company-id="cybrexa">
+                <div class="company-name">Cybrexa</div>
+                <span class="stage-tag">Venture</span>
+            </div>
+            <div class="portfolio-item fade-in" data-category="venture" data-company-id="threatmate">
+                <div class="company-name">ThreatMate</div>
+                <span class="stage-tag">Venture</span>
+            </div>
+            <div class="portfolio-item fade-in" data-category="venture" data-company-id="newzip">
+                <div class="company-name">NewZip</div>
+                <span class="stage-tag">Venture</span>
+            </div>
+
+            <!-- Growth Stage Companies -->
+            <div class="portfolio-item fade-in" data-category="growth" data-company-id="carta">
+                <div class="company-name">Carta</div>
+                <span class="stage-tag">Growth</span>
+            </div>
+            <div class="portfolio-item fade-in" data-category="growth" data-company-id="spotter">
+                <div class="company-name">Spotter</div>
+                <span class="stage-tag">Growth</span>
+            </div>
+            <div class="portfolio-item fade-in" data-category="growth" data-company-id="chippercash">
+                <div class="company-name">ChipperCash</div>
+                <span class="stage-tag">Growth</span>
+            </div>
+            <div class="portfolio-item fade-in" data-category="growth" data-company-id="urbanpiper">
+                <div class="company-name">UrbanPiper</div>
+                <span class="stage-tag">Growth</span>
+            </div>
+            <div class="portfolio-item fade-in" data-category="growth" data-company-id="advantiahealth">
+                <div class="company-name">Advantia Health</div>
+                <span class="stage-tag">Growth</span>
+            </div>
+            <div class="portfolio-item fade-in" data-category="growth" data-company-id="carbon6">
+                <div class="company-name">Carbon6</div>
+                <span class="stage-tag">Growth</span>
+            </div>
+            <div class="portfolio-item fade-in" data-category="growth" data-company-id="collective">
+                <div class="company-name">Collective</div>
+                <span class="stage-tag">Growth</span>
+            </div>
+            <div class="portfolio-item fade-in" data-category="growth" data-company-id="agree">
+                <div class="company-name">Agree.com</div>
+                <span class="stage-tag">Growth</span>
+            </div>
+            <div class="portfolio-item fade-in" data-category="growth" data-company-id="urbanstems">
+                <div class="company-name">UrbanStems</div>
+                <span class="stage-tag">Growth</span>
+            </div>
+            <div class="portfolio-item fade-in" data-category="growth" data-company-id="marketerhire">
+                <div class="company-name">MarketerHire</div>
+                <span class="stage-tag">Growth</span>
+            </div>
+            <div class="portfolio-item fade-in" data-category="growth" data-company-id="lucyrx">
+                <div class="company-name">LucyRx</div>
+                <span class="stage-tag">Growth</span>
+            </div>
+            <div class="portfolio-item fade-in" data-category="growth" data-company-id="luna">
+                <div class="company-name">Luna</div>
+                <span class="stage-tag">Growth</span>
+            </div>
+            <div class="portfolio-item fade-in" data-category="growth" data-company-id="newton">
+                <div class="company-name">Newton</div>
+                <span class="stage-tag">Growth</span>
+            </div>
+            <div class="portfolio-item fade-in" data-category="growth" data-company-id="bongo">
+                <div class="company-name">Bongo</div>
+                <span class="stage-tag">Growth</span>
+            </div>
+            <div class="portfolio-item fade-in" data-category="growth" data-company-id="jiji">
+                <div class="company-name">Jiji</div>
+                <span class="stage-tag">Growth</span>
+            </div>
+            <div class="portfolio-item fade-in" data-category="growth" data-company-id="acqu">
+                <div class="company-name">Acqu</div>
+                <span class="stage-tag">Growth</span>
+            </div>
+            <div class="portfolio-item fade-in" data-category="growth" data-company-id="autograph">
+                <div class="company-name">Autograph</div>
+                <span class="stage-tag">Growth</span>
+            </div>
+            <div class="portfolio-item fade-in" data-category="growth" data-company-id="beagle">
+                <div class="company-name">Beagle</div>
+                <span class="stage-tag">Growth</span>
+            </div>
+            <div class="portfolio-item fade-in" data-category="growth" data-company-id="carwisely">
+                <div class="company-name">CarWisely</div>
+                <span class="stage-tag">Growth</span>
+            </div>
+            <div class="portfolio-item fade-in" data-category="growth" data-company-id="clearone">
+                <div class="company-name">ClearOne Advantage</div>
+                <span class="stage-tag">Growth</span>
+            </div>
+            <div class="portfolio-item fade-in" data-category="growth" data-company-id="ecosoul">
+                <div class="company-name">EcoSoul Home</div>
+                <span class="stage-tag">Growth</span>
+            </div>
+            <div class="portfolio-item fade-in" data-category="growth" data-company-id="gymkhana">
+                <div class="company-name">Gymkhana Fine Foods</div>
+                <span class="stage-tag">Growth</span>
+            </div>
+            <div class="portfolio-item fade-in" data-category="growth" data-company-id="impossiblefoods">
+                <div class="company-name">Impossible Foods</div>
+                <span class="stage-tag">Growth</span>
+            </div>
+            <div class="portfolio-item fade-in" data-category="growth" data-company-id="mintable">
+                <div class="company-name">Mintable</div>
+                <span class="stage-tag">Growth</span>
+            </div>
+            <div class="portfolio-item fade-in" data-category="growth" data-company-id="opal">
+                <div class="company-name">Opal Camera</div>
+                <span class="stage-tag">Growth</span>
+            </div>
+            <div class="portfolio-item fade-in" data-category="growth" data-company-id="spacex">
+                <div class="company-name">SpaceX</div>
+                <span class="stage-tag">Growth</span>
+            </div>
+            <div class="portfolio-item fade-in" data-category="growth" data-company-id="redesignhealth">
+                <div class="company-name">Redesign Health</div>
+                <span class="stage-tag">Growth</span>
+            </div>
+            <div class="portfolio-item fade-in" data-category="growth" data-company-id="gravitiq">
+                <div class="company-name">Gravitiq</div>
+                <span class="stage-tag">Growth</span>
+            </div>
+            <div class="portfolio-item fade-in" data-category="growth" data-company-id="octagos">
+                <div class="company-name">Octagos</div>
+                <span class="stage-tag">Growth</span>
+            </div>
+            <div class="portfolio-item fade-in" data-category="growth" data-company-id="streamorders">
+                <div class="company-name">Stream Orders</div>
+                <span class="stage-tag">Growth</span>
+            </div>
+            <div class="portfolio-item fade-in" data-category="growth" data-company-id="partsavatar">
+                <div class="company-name">Parts Avatar</div>
+                <span class="stage-tag">Growth</span>
+            </div>
+            <div class="portfolio-item fade-in" data-category="growth" data-company-id="embrace">
+                <div class="company-name">Embrace Software</div>
+                <span class="stage-tag">Growth</span>
+            </div>
+            <div class="portfolio-item fade-in" data-category="growth" data-company-id="indiaindex">
+                <div class="company-name">India Index</div>
+                <span class="stage-tag">Growth</span>
+            </div>
+            <div class="portfolio-item fade-in" data-category="growth" data-company-id="oatsovernight">
+                <div class="company-name">Oats Overnight</div>
+                <span class="stage-tag">Growth</span>
+            </div>
+            <div class="portfolio-item fade-in" data-category="growth" data-company-id="sworkit">
+                <div class="company-name">Sworkit Health</div>
+                <span class="stage-tag">Growth</span>
+            </div>
+            <div class="portfolio-item fade-in" data-category="growth" data-company-id="thrivefinancial">
+                <div class="company-name">Thrive Financial</div>
+                <span class="stage-tag">Growth</span>
+            </div>
+            <div class="portfolio-item fade-in" data-category="growth" data-company-id="camcollective">
+                <div class="company-name">CAM Collective</div>
+                <span class="stage-tag">Growth</span>
+            </div>
+            <div class="portfolio-item fade-in" data-category="growth" data-company-id="accelerateddental">
+                <div class="company-name">Accelerated Dental</div>
+                <span class="stage-tag">Growth</span>
+            </div>
+            <div class="portfolio-item fade-in" data-category="growth" data-company-id="haircuttery">
+                <div class="company-name">Hair Cuttery</div>
+                <span class="stage-tag">Growth</span>
+            </div>
+            <div class="portfolio-item fade-in" data-category="growth" data-company-id="usinspect">
+                <div class="company-name">US Inspect</div>
+                <span class="stage-tag">Growth</span>
+            </div>
+            <div class="portfolio-item fade-in" data-category="growth" data-company-id="thecut">
+                <div class="company-name">The Cut</div>
+                <span class="stage-tag">Growth</span>
+            </div>
+            <div class="portfolio-item fade-in" data-category="growth" data-company-id="palisades">
+                <div class="company-name">Palisades</div>
+                <span class="stage-tag">Growth</span>
+            </div>
+            <div class="portfolio-item fade-in" data-category="growth" data-company-id="gcturbo">
+                <div class="company-name">GC Turbo</div>
+                <span class="stage-tag">Growth</span>
+            </div>
+            <div class="portfolio-item fade-in" data-category="growth" data-company-id="valeo">
+                <div class="company-name">Valeo</div>
+                <span class="stage-tag">Growth</span>
+            </div>
+            <div class="portfolio-item fade-in" data-category="growth" data-company-id="nevadaking">
+                <div class="company-name">Nevada King Gold</div>
+                <span class="stage-tag">Growth</span>
+            </div>
+            <div class="portfolio-item fade-in" data-category="growth" data-company-id="entrokey">
+                <div class="company-name">Entrokey Labs</div>
+                <span class="stage-tag">Growth</span>
+            </div>
+            <div class="portfolio-item fade-in" data-category="growth" data-company-id="mlc">
+                <div class="company-name">Major League Cricket</div>
+                <span class="stage-tag">Growth</span>
+            </div>
+            <div class="portfolio-item fade-in" data-category="growth" data-company-id="cohesity">
+                <div class="company-name">Cohesity</div>
+                <span class="stage-tag">Growth</span>
+            </div>
+
+            <!-- Fund Investments -->
+            <div class="portfolio-item fade-in" data-category="funds" data-company-id="exacapital">
+                <div class="company-name">Exa Capital</div>
+                <span class="stage-tag">Fund</span>
+            </div>
+            <div class="portfolio-item fade-in" data-category="funds" data-company-id="permanentequity">
+                <div class="company-name">Permanent Equity</div>
+                <span class="stage-tag">Fund</span>
+            </div>
+            <div class="portfolio-item fade-in" data-category="funds" data-company-id="founderpath">
+                <div class="company-name">FounderPath</div>
+                <span class="stage-tag">Fund</span>
+            </div>
+            <div class="portfolio-item fade-in" data-category="funds" data-company-id="continuum">
+                <div class="company-name">Continuum MVP</div>
+                <span class="stage-tag">Fund</span>
+            </div>
+            <div class="portfolio-item fade-in" data-category="funds" data-company-id="tiny">
+                <div class="company-name">Tiny</div>
+                <span class="stage-tag">Fund</span>
+            </div>
+            <div class="portfolio-item fade-in" data-category="funds" data-company-id="thrive">
+                <div class="company-name">Thrive</div>
+                <span class="stage-tag">Fund</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Real Estate Section -->
+    <section id="real-estate" style="background: var(--color-white); padding: 6rem 3rem;">
+        <div class="section-header fade-in">
+            <div class="section-label">Real Estate</div>
+            <h2>Strategic Properties</h2>
+            <p class="section-description">
+                High-quality commercial properties across the Mid-Atlantic, selected for location, cash flow stability, and long-term value creation.
+            </p>
+        </div>
+
+        <div class="real-estate-grid">
+            <div class="property-card fade-in">
+                <div class="property-image">🏢</div>
+                <div class="property-info">
+                    <div class="property-type">Shopping Center</div>
+                    <div class="property-name">Largo Town Center</div>
+                    <div class="property-location">Largo, MD</div>
+                </div>
+            </div>
+
+            <div class="property-card fade-in">
+                <div class="property-image">🏬</div>
+                <div class="property-info">
+                    <div class="property-type">Shopping Center</div>
+                    <div class="property-name">St. Charles Towne Plaza</div>
+                    <div class="property-location">Waldorf, MD</div>
+                </div>
+            </div>
+
+            <div class="property-card fade-in">
+                <div class="property-image">🏪</div>
+                <div class="property-info">
+                    <div class="property-type">Shopping Center</div>
+                    <div class="property-name">Pickett Road Center</div>
+                    <div class="property-location">Fairfax, VA</div>
+                </div>
+            </div>
+
+            <div class="property-card fade-in">
+                <div class="property-image">🏢</div>
+                <div class="property-info">
+                    <div class="property-type">Shopping Center</div>
+                    <div class="property-name">Old Sandy Spring Road</div>
+                    <div class="property-location">Laurel, MD</div>
+                </div>
+            </div>
+
+            <div class="property-card fade-in">
+                <div class="property-image">🏛️</div>
+                <div class="property-info">
+                    <div class="property-type">Office Building</div>
+                    <div class="property-name">1801 Rockville Pike</div>
+                    <div class="property-location">Rockville, MD</div>
+                </div>
+            </div>
+
+            <div class="property-card fade-in">
+                <div class="property-image">🏢</div>
+                <div class="property-info">
+                    <div class="property-type">Office Building</div>
+                    <div class="property-name">8500 Executive Park Avenue</div>
+                    <div class="property-location">Fairfax, VA</div>
+                </div>
+            </div>
+
+            <div class="property-card fade-in">
+                <div class="property-image">🏭</div>
+                <div class="property-info">
+                    <div class="property-type">Industrial Building</div>
+                    <div class="property-name">Standish Place</div>
+                    <div class="property-location">Derwood, MD</div>
+                </div>
+            </div>
+
+            <div class="property-card fade-in">
+                <div class="property-image">🏗️</div>
+                <div class="property-info">
+                    <div class="property-type">Industrial Building</div>
+                    <div class="property-name">Forbes Center 12</div>
+                    <div class="property-location">Lanham, MD</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="section-header fade-in">
+            <div class="section-label">Get in Touch</div>
+            <h2>Let's Build Together</h2>
+            <p class="section-description">
+                Whether you're a founder, co-investor, or community partner, we welcome meaningful conversations.
+            </p>
+        </div>
+
+        <div class="contact-grid">
+            <div class="contact-card fade-in">
+                <h3>Investment Inquiries</h3>
+                <p>Exploring a collaboration, co-investment, or strategic opportunity? Share your proposal.</p>
+                <a href="mailto:investments@singhcap.com">investments@singhcap.com</a>
+            </div>
+
+            <div class="contact-card fade-in">
+                <h3>Philanthropy & Community</h3>
+                <p>We welcome partnerships that advance education, inclusion, and civic engagement.</p>
+                <a href="mailto:foundation@singhcap.com">foundation@singhcap.com</a>
+            </div>
+
+            <div class="contact-card fade-in">
+                <h3>General & Media</h3>
+                <p>For general correspondence or press-related matters, please contact our team.</p>
+                <a href="mailto:media@singhcap.com">media@singhcap.com</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Modal -->
+    <div class="portfolio-modal" id="portfolioModal">
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose">×</button>
+            <div class="modal-header">
+                <h3 class="modal-company-name" id="modalCompanyName"></h3>
+                <span class="modal-stage" id="modalStage"></span>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Content will be dynamically inserted -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2024 Singh Capital Partners. Intelligent Capital. Enduring Impact.</p>
+    </footer>
+
+    <script>
+        // Hero Video Loop - Force loop with JS as backup for loop attribute
+        (function() {
+            const video = document.getElementById('heroVideo');
+            if (!video) return;
+            
+            // Force loop by restarting when video ends
+            video.addEventListener('ended', function() {
+                video.currentTime = 0;
+                video.play().catch(e => console.log('Video replay failed:', e));
+            }, false);
+            
+            // Try to play (some browsers block autoplay)
+            video.play().catch(e => {
+                console.log('Initial autoplay blocked:', e);
+                // Try again on user interaction
+                document.addEventListener('click', function playOnce() {
+                    video.play();
+                    document.removeEventListener('click', playOnce);
+                }, { once: true });
+            });
+        })();
+
+        // Company data
+        const companyData = {
+            'groq': {
+                name: 'Groq',
+                stage: 'Venture',
+                founder: 'Jonathan Ross',
+                website: 'https://groq.com',
+                linkedin: 'https://www.linkedin.com/company/groq',
+                twitter: 'https://twitter.com/GroqInc',
+                sector: 'AI Infrastructure',
+                description: 'Building the world\'s fastest AI inference technology with custom LPU architecture.',
+                highlights: [
+                    'Founded by former Google TPU lead architect',
+                    'Ultra-low latency AI inference chips',
+                    'Serving leading AI companies and enterprises',
+                    '10x faster inference than traditional GPUs'
+                ]
+            },
+            'blackcrowai': {
+                name: 'BlackCrow AI',
+                stage: 'Venture',
+                founder: 'Richard Harris & Damon Tassone',
+                website: 'https://www.blackcrow.ai',
+                linkedin: 'https://www.linkedin.com/company/blackcrowai',
+                twitter: 'https://twitter.com/blackcrowai',
+                sector: 'E-commerce / AI',
+                description: 'Machine learning predictions for e-commerce brands to improve customer acquisition and profitability.',
+                highlights: [
+                    'Real-time customer value predictions',
+                    '25-50% improvement in acquisition efficiency',
+                    'Founded by former Travelocity executives'
+                ]
+            },
+            'arintra': {
+                name: 'Arintra',
+                stage: 'Venture',
+                founder: 'Nitesh Shroff & Preeti Bhargava',
+                website: 'https://www.arintra.com',
+                linkedin: 'https://www.linkedin.com/company/arintra',
+                sector: 'Healthcare IT',
+                description: 'AI-powered autonomous medical coding platform helping healthcare providers secure accurate reimbursement.',
+                highlights: [
+                    'Y Combinator backed',
+                    '5-8% revenue uplift for customers',
+                    'Integrated with Epic, Athena, Cerner EHRs'
+                ]
+            },
+            'humata': {
+                name: 'Humata',
+                stage: 'Venture',
+                founder: 'Dan Rasmuson & Cyrus Khajvandi',
+                website: 'https://www.humata.ai',
+                linkedin: 'https://www.linkedin.com/company/humata-ai',
+                twitter: 'https://twitter.com/humataAI',
+                sector: 'AI/Enterprise Software',
+                description: 'ChatGPT for your documents - enterprise AI that answers questions about complex files.',
+                highlights: [
+                    'Processing millions of documents',
+                    'Trusted by Fortune 500 companies',
+                    'Advanced document understanding AI'
+                ]
+            },
+            'zeroeyes': {
+                name: 'ZeroEyes',
+                stage: 'Venture',
+                founder: 'Mike Lahiff & Sam Alaimo',
+                website: 'https://zeroeyes.com',
+                linkedin: 'https://www.linkedin.com/company/zeroeyes',
+                twitter: 'https://twitter.com/ZeroEyesAI',
+                sector: 'Security Technology',
+                description: 'AI-powered gun detection platform preventing active shooter incidents.',
+                highlights: [
+                    'Founded by Navy SEALs',
+                    'Protecting over 1,000 locations nationwide',
+                    'Saving lives through early threat detection'
+                ]
+            },
+            'carta': {
+                name: 'Carta',
+                stage: 'Growth',
+                founder: 'Henry Ward',
+                website: 'https://carta.com',
+                linkedin: 'https://www.linkedin.com/company/carta-hq',
+                twitter: 'https://twitter.com/CartaHQ',
+                sector: 'FinTech',
+                description: 'Ownership and equity management platform for private companies.',
+                highlights: [
+                    '40,000+ companies on platform',
+                    '$3T+ in assets managed',
+                    'Industry standard for cap table management'
+                ]
+            },
+            'spotter': {
+                name: 'Spotter',
+                stage: 'Growth',
+                founder: 'Aaron DeBevoise',
+                website: 'https://www.spotter.com',
+                linkedin: 'https://www.linkedin.com/company/spotter',
+                twitter: 'https://twitter.com/SpotterHQ',
+                instagram: 'https://www.instagram.com/spotterhq',
+                sector: 'Creator Economy',
+                description: 'Funding platform for YouTube creators, providing capital for content investment.',
+                highlights: [
+                    'Partnered with top YouTube creators',
+                    'Deployed $850M+ to creators',
+                    'Data-driven creator financing'
+                ]
+            },
+            'chippercash': {
+                name: 'ChipperCash',
+                stage: 'Growth',
+                founder: 'Ham Serunjogi & Maijid Moujaled',
+                website: 'https://www.chippercash.com',
+                linkedin: 'https://www.linkedin.com/company/chippercash',
+                twitter: 'https://twitter.com/ChipperCashApp',
+                instagram: 'https://www.instagram.com/chippercashapp',
+                sector: 'FinTech',
+                description: 'Cross-border payments and financial services across Africa.',
+                highlights: [
+                    'Operating in 9+ African countries',
+                    'Millions of users across continent',
+                    'Enabling seamless cross-border transactions'
+                ]
+            },
+            'impossiblefoods': {
+                name: 'Impossible Foods',
+                stage: 'Growth',
+                founder: 'Patrick O. Brown',
+                website: 'https://impossiblefoods.com',
+                linkedin: 'https://www.linkedin.com/company/impossible-foods-inc-',
+                twitter: 'https://twitter.com/ImpossibleFoods',
+                instagram: 'https://www.instagram.com/impossible_foods',
+                facebook: 'https://www.facebook.com/impossiblefoods',
+                sector: 'Food Technology',
+                description: 'Plant-based meat alternatives transforming the global food system.',
+                highlights: [
+                    'Available in 40,000+ locations',
+                    'Reducing environmental impact of food',
+                    'Stanford biochemist founder'
+                ]
+            },
+            'spacex': {
+                name: 'SpaceX',
+                stage: 'Growth',
+                founder: 'Elon Musk',
+                website: 'https://www.spacex.com',
+                linkedin: 'https://www.linkedin.com/company/spacex',
+                twitter: 'https://twitter.com/SpaceX',
+                instagram: 'https://www.instagram.com/spacex',
+                youtube: 'https://www.youtube.com/spacex',
+                sector: 'Aerospace',
+                description: 'Revolutionizing space technology with reusable rockets and spacecraft.',
+                highlights: [
+                    'First private company to reach ISS',
+                    'Leading Starlink satellite internet',
+                    'Pioneering Mars colonization technology'
+                ]
+            },
+            'urbanpiper': {
+                name: 'UrbanPiper',
+                stage: 'Growth',
+                founder: 'Saurabh Gupta & Anirban Majumdar',
+                website: 'https://www.urbanpiper.com',
+                linkedin: 'https://www.linkedin.com/company/urbanpiper',
+                twitter: 'https://twitter.com/urbanpipertech',
+                sector: 'Restaurant Technology',
+                description: 'SaaS platform connecting restaurants with online delivery platforms.',
+                highlights: [
+                    'Operating across 35+ countries',
+                    'Powering 40,000+ restaurants',
+                    'Integrated with major delivery platforms'
+                ]
+            },
+            'exacapital': {
+                name: 'Exa Capital',
+                stage: 'Fund',
+                website: 'https://exacapital.co',
+                linkedin: 'https://www.linkedin.com/company/exa-capital',
+                twitter: 'https://twitter.com/exacapital',
+                sector: 'Venture Capital',
+                description: 'Seed-stage venture fund focused on SaaS and marketplace businesses.',
+                highlights: [
+                    'Data-driven investment approach',
+                    'Strong network of B2B founders',
+                    'Focus on capital-efficient growth'
+                ]
+            },
+            'permanentequity': {
+                name: 'Permanent Equity',
+                stage: 'Fund',
+                founder: 'Brent Beshore',
+                website: 'https://www.permanentequity.com',
+                linkedin: 'https://www.linkedin.com/company/permanent-equity',
+                twitter: 'https://twitter.com/PermanentEquity',
+                sector: 'Private Equity',
+                description: 'Acquiring and holding founder-led businesses permanently.',
+                highlights: [
+                    'Patient capital approach',
+                    'Focus on legacy preservation',
+                    'Transparent investment philosophy'
+                ]
+            },
+            'tiny': {
+                name: 'Tiny',
+                stage: 'Fund',
+                founder: 'Andrew Wilkinson & Chris Sparling',
+                website: 'https://tiny.com',
+                linkedin: 'https://www.linkedin.com/company/tinycapital',
+                twitter: 'https://twitter.com/awilkinson',
+                sector: 'Holding Company',
+                description: 'Modern Berkshire Hathaway for internet businesses.',
+                highlights: [
+                    'Portfolio of 40+ companies',
+                    'Focus on profitable internet businesses',
+                    'Long-term ownership model'
+                ]
+            },
+            'bricklayerai': {
+                name: 'Bricklayer AI',
+                stage: 'Venture',
+                website: 'https://www.bricklayer.ai',
+                linkedin: 'https://www.linkedin.com/company/bricklayerai',
+                sector: 'Construction Technology',
+                description: 'AI-powered construction intelligence platform.',
+                highlights: [
+                    'Automating construction workflows',
+                    'Improving project efficiency'
+                ]
+            },
+            'moonlite': {
+                name: 'Moonlite',
+                stage: 'Venture',
+                website: 'https://www.moonlite.ai',
+                sector: 'AI/Software',
+                description: 'AI-powered platform for business automation.',
+                highlights: [
+                    'Modern AI solutions',
+                    'Enterprise automation'
+                ]
+            },
+            'brelle': {
+                name: 'Brelle',
+                stage: 'Venture',
+                website: 'https://www.brelle.tech',
+                linkedin: 'https://www.linkedin.com/company/brelle',
+                sector: 'Accessibility Technology',
+                description: 'AI-powered assistive technology for the visually impaired.',
+                highlights: [
+                    'Real-time accessibility solutions',
+                    'Empowering independence'
+                ]
+            },
+            'metamap': {
+                name: 'MetaMap',
+                stage: 'Venture',
+                website: 'https://www.metamap.com',
+                linkedin: 'https://www.linkedin.com/company/getmetamap',
+                sector: 'Identity Verification',
+                description: 'Identity verification and KYC platform for global compliance.',
+                highlights: [
+                    'Operating in 190+ countries',
+                    'Trusted identity verification',
+                    'Fraud prevention technology'
+                ]
+            },
+            'instylla': {
+                name: 'Instylla',
+                stage: 'Venture',
+                website: 'https://instylla.com',
+                sector: 'Software',
+                description: 'Modern software solutions for businesses.',
+                highlights: [
+                    'Enterprise software platform'
+                ]
+            },
+            'tennissocial': {
+                name: 'TennisSocial AI',
+                stage: 'Venture',
+                website: 'https://www.tennissocial.ai',
+                sector: 'Sports Technology',
+                description: 'AI-powered tennis coaching and social platform.',
+                highlights: [
+                    'Connecting tennis players',
+                    'AI-powered coaching insights'
+                ]
+            },
+            'sightly': {
+                name: 'Sightly',
+                stage: 'Venture',
+                website: 'https://sightly.com',
+                linkedin: 'https://www.linkedin.com/company/sightly',
+                sector: 'SaaS',
+                description: 'Modern SaaS platform for business operations.',
+                highlights: [
+                    'Streamlining workflows'
+                ]
+            },
+            'point': {
+                name: 'Point',
+                stage: 'Venture',
+                website: 'https://www.point.me',
+                sector: 'Travel Technology',
+                description: 'Points and miles optimization platform.',
+                highlights: [
+                    'Maximizing travel rewards',
+                    'Smart booking algorithms'
+                ]
+            },
+            'tailos': {
+                name: 'Tailos',
+                stage: 'Venture',
+                website: 'https://tailos.com',
+                sector: 'Software',
+                description: 'Custom software solutions platform.',
+                highlights: [
+                    'Tailored business solutions'
+                ]
+            },
+            'incued': {
+                name: 'Incued',
+                stage: 'Venture',
+                website: 'https://www.incued.com',
+                linkedin: 'https://www.linkedin.com/company/incued',
+                sector: 'HR Technology',
+                description: 'Modern HR and workforce management platform.',
+                highlights: [
+                    'Streamlining HR processes',
+                    'Employee engagement tools'
+                ]
+            },
+            'cybrexa': {
+                name: 'Cybrexa',
+                stage: 'Venture',
+                website: 'https://www.cybrexa.com',
+                sector: 'Cybersecurity',
+                description: 'Cybersecurity solutions for modern enterprises.',
+                highlights: [
+                    'Advanced threat detection',
+                    'Enterprise security'
+                ]
+            },
+            'threatmate': {
+                name: 'ThreatMate',
+                stage: 'Venture',
+                website: 'https://www.threatmate.com',
+                sector: 'Cybersecurity',
+                description: 'Threat intelligence and security platform.',
+                highlights: [
+                    'Real-time threat monitoring',
+                    'Proactive security'
+                ]
+            },
+            'newzip': {
+                name: 'NewZip',
+                stage: 'Venture',
+                website: 'https://www.newzip.com',
+                sector: 'Technology',
+                description: 'Modern technology platform.',
+                highlights: [
+                    'Innovative solutions'
+                ]
+            },
+            'advantiahealth': {
+                name: 'Advantia Health',
+                stage: 'Growth',
+                website: 'https://www.advantiahealth.com',
+                linkedin: 'https://www.linkedin.com/company/advantia-health',
+                facebook: 'https://www.facebook.com/AdvantiaHealth',
+                sector: 'Healthcare',
+                description: 'Women\'s healthcare provider network.',
+                highlights: [
+                    'Comprehensive women\'s health services',
+                    'Multi-location provider network'
+                ]
+            },
+            'carbon6': {
+                name: 'Carbon6',
+                stage: 'Growth',
+                website: 'https://www.carbon6.io',
+                linkedin: 'https://www.linkedin.com/company/carbon6technologies',
+                twitter: 'https://twitter.com/Carbon6Tech',
+                sector: 'E-commerce Technology',
+                description: 'Suite of tools for Amazon sellers and e-commerce brands.',
+                highlights: [
+                    'Comprehensive seller tools',
+                    'Amazon marketplace optimization'
+                ]
+            },
+            'collective': {
+                name: 'Collective',
+                stage: 'Growth',
+                website: 'https://www.collective.com',
+                linkedin: 'https://www.linkedin.com/company/collectivecom',
+                twitter: 'https://twitter.com/CollectiveCom',
+                sector: 'FinTech',
+                description: 'Back-office platform for self-employed businesses.',
+                highlights: [
+                    'Taxes, accounting, and bookkeeping',
+                    'Serving thousands of businesses'
+                ]
+            },
+            'agree': {
+                name: 'Agree.com',
+                stage: 'Growth',
+                website: 'https://agree.com',
+                sector: 'Legal Technology',
+                description: 'Digital contract and agreement platform.',
+                highlights: [
+                    'Streamlining contract workflows',
+                    'Digital signature solutions'
+                ]
+            },
+            'urbanstems': {
+                name: 'UrbanStems',
+                stage: 'Growth',
+                website: 'https://urbanstems.com',
+                linkedin: 'https://www.linkedin.com/company/urbanstems',
+                twitter: 'https://twitter.com/UrbanStems',
+                instagram: 'https://www.instagram.com/urbanstems',
+                facebook: 'https://www.facebook.com/UrbanStems',
+                sector: 'E-commerce',
+                description: 'Modern flower and plant delivery service.',
+                highlights: [
+                    'Nationwide delivery',
+                    'Curated floral designs',
+                    'Farm-to-door freshness'
+                ]
+            },
+            'marketerhire': {
+                name: 'MarketerHire',
+                stage: 'Growth',
+                website: 'https://marketerhire.com',
+                linkedin: 'https://www.linkedin.com/company/marketerhire',
+                twitter: 'https://twitter.com/MarketerHire',
+                sector: 'Talent Marketplace',
+                description: 'Marketplace connecting companies with pre-vetted marketing freelancers.',
+                highlights: [
+                    'Vetted marketing talent',
+                    'Flexible hiring solutions'
+                ]
+            },
+            'lucyrx': {
+                name: 'LucyRx',
+                stage: 'Growth',
+                website: 'https://lucyrx.com',
+                sector: 'Healthcare/Pharmacy',
+                description: 'Digital pharmacy platform.',
+                highlights: [
+                    'Online prescription fulfillment',
+                    'Modern pharmacy services'
+                ]
+            },
+            'luna': {
+                name: 'Luna',
+                stage: 'Growth',
+                website: 'https://www.getluna.com',
+                sector: 'Healthcare',
+                description: 'On-demand physical therapy platform.',
+                highlights: [
+                    'In-home physical therapy',
+                    'Licensed therapists nationwide'
+                ]
+            },
+            'newton': {
+                name: 'Newton',
+                stage: 'Growth',
+                website: 'https://www.newton.co',
+                sector: 'FinTech/Crypto',
+                description: 'Cryptocurrency trading platform.',
+                highlights: [
+                    'User-friendly crypto trading',
+                    'Secure digital asset platform'
+                ]
+            },
+            'bongo': {
+                name: 'Bongo',
+                stage: 'Growth',
+                website: 'https://bongobd.com',
+                sector: 'E-commerce',
+                description: 'E-commerce platform in Bangladesh.',
+                highlights: [
+                    'Leading online marketplace',
+                    'Expanding South Asian presence'
+                ]
+            },
+            'jiji': {
+                name: 'Jiji',
+                stage: 'Growth',
+                website: 'https://jiji.ng',
+                sector: 'Classifieds/Marketplace',
+                description: 'Free classifieds marketplace in Africa.',
+                highlights: [
+                    'Millions of users across Africa',
+                    'Leading classifieds platform'
+                ]
+            },
+            'acqu': {
+                name: 'Acqu',
+                stage: 'Growth',
+                website: 'https://www.acqu.co',
+                sector: 'E-commerce',
+                description: 'E-commerce aggregator acquiring and scaling Amazon brands.',
+                highlights: [
+                    'Amazon FBA aggregator',
+                    'Brand portfolio optimization'
+                ]
+            },
+            'autograph': {
+                name: 'Autograph',
+                stage: 'Growth',
+                website: 'https://autograph.io',
+                sector: 'NFT/Web3',
+                description: 'NFT platform for creators and collectors.',
+                highlights: [
+                    'Celebrity and creator NFTs',
+                    'Web3 marketplace'
+                ]
+            },
+            'beagle': {
+                name: 'Beagle',
+                stage: 'Growth',
+                website: 'https://www.beagleservices.com',
+                sector: 'Services',
+                description: 'Modern service platform.',
+                highlights: [
+                    'On-demand services'
+                ]
+            },
+            'carwisely': {
+                name: 'CarWisely',
+                stage: 'Growth',
+                website: 'https://carwisely.com',
+                sector: 'Automotive',
+                description: 'Car buying and ownership platform.',
+                highlights: [
+                    'Smart car shopping tools',
+                    'Ownership management'
+                ]
+            },
+            'clearone': {
+                name: 'ClearOne Advantage',
+                stage: 'Growth',
+                website: 'https://www.clearoneadvantage.com',
+                sector: 'Financial Services',
+                description: 'Debt resolution and financial services.',
+                highlights: [
+                    'Debt management solutions',
+                    'Financial counseling'
+                ]
+            },
+            'ecosoul': {
+                name: 'EcoSoul Home',
+                stage: 'Growth',
+                website: 'https://ecosoulhome.in',
+                sector: 'Consumer Products',
+                description: 'Sustainable home products and eco-friendly alternatives.',
+                highlights: [
+                    'Plastic-free products',
+                    'Sustainable living solutions'
+                ]
+            },
+            'gymkhana': {
+                name: 'Gymkhana Fine Foods',
+                stage: 'Growth',
+                website: 'https://www.gymkhanafinefoods.com',
+                sector: 'Food & Beverage',
+                description: 'Indian food products and spices.',
+                highlights: [
+                    'Authentic Indian cuisine',
+                    'Premium food products'
+                ]
+            },
+            'mintable': {
+                name: 'Mintable',
+                stage: 'Growth',
+                website: 'https://mintable.com',
+                sector: 'NFT/Web3',
+                description: 'NFT marketplace and minting platform.',
+                highlights: [
+                    'Easy NFT creation',
+                    'Gasless minting'
+                ]
+            },
+            'opal': {
+                name: 'Opal Camera',
+                stage: 'Growth',
+                website: 'https://opalcamera.com',
+                linkedin: 'https://www.linkedin.com/company/opalcamera',
+                twitter: 'https://twitter.com/opalcamera',
+                instagram: 'https://www.instagram.com/opalcamera',
+                sector: 'Consumer Electronics',
+                description: 'Professional webcam and video hardware.',
+                highlights: [
+                    'Cinema-quality webcams',
+                    'Professional video tools'
+                ]
+            },
+            'redesignhealth': {
+                name: 'Redesign Health',
+                stage: 'Growth',
+                website: 'https://www.redesignhealth.com',
+                linkedin: 'https://www.linkedin.com/company/redesign-health',
+                twitter: 'https://twitter.com/RedesignHealth',
+                sector: 'Healthcare Venture Studio',
+                description: 'Healthcare company builder and venture studio.',
+                highlights: [
+                    'Creating healthcare companies',
+                    'Portfolio of health startups'
+                ]
+            },
+            'gravitiq': {
+                name: 'Gravitiq',
+                stage: 'Growth',
+                website: 'https://www.gravitiq.com',
+                linkedin: 'https://www.linkedin.com/company/gravitiq',
+                sector: 'Technology',
+                description: 'Technology platform and solutions.',
+                highlights: [
+                    'Modern tech infrastructure'
+                ]
+            },
+            'octagos': {
+                name: 'Octagos',
+                stage: 'Growth',
+                website: 'https://www.octagos.com',
+                sector: 'Software',
+                description: 'Enterprise software solutions.',
+                highlights: [
+                    'Business operations platform'
+                ]
+            },
+            'streamorders': {
+                name: 'Stream Orders',
+                stage: 'Growth',
+                website: 'https://www.streamorders.com',
+                sector: 'Restaurant Technology',
+                description: 'Restaurant ordering and management platform.',
+                highlights: [
+                    'Order management system',
+                    'Multi-location support'
+                ]
+            },
+            'partsavatar': {
+                name: 'Parts Avatar',
+                stage: 'Growth',
+                website: 'https://partsavatar.ca',
+                sector: 'Automotive',
+                description: 'Online auto parts retailer in Canada.',
+                highlights: [
+                    'Comprehensive parts catalog',
+                    'Fast shipping across Canada'
+                ]
+            },
+            'embrace': {
+                name: 'Embrace Software',
+                stage: 'Growth',
+                website: 'https://www.embracesoftwareinc.com',
+                sector: 'Software',
+                description: 'Software solutions for businesses.',
+                highlights: [
+                    'Enterprise software development'
+                ]
+            },
+            'indiaindex': {
+                name: 'India Index',
+                stage: 'Growth',
+                website: 'https://indiaindex.com',
+                sector: 'Finance',
+                description: 'Investment platform focused on India.',
+                highlights: [
+                    'India-focused investments',
+                    'Market access solutions'
+                ]
+            },
+            'oatsovernight': {
+                name: 'Oats Overnight',
+                stage: 'Growth',
+                website: 'https://www.oatsovernight.com',
+                linkedin: 'https://www.linkedin.com/company/oats-overnight',
+                twitter: 'https://twitter.com/OatsOvernight',
+                instagram: 'https://www.instagram.com/oatsovernight',
+                facebook: 'https://www.facebook.com/OatsOvernight',
+                sector: 'Food & Beverage',
+                description: 'High-protein overnight oats delivery service.',
+                highlights: [
+                    'Convenient nutrition',
+                    'Subscription-based delivery'
+                ]
+            },
+            'sworkit': {
+                name: 'Sworkit Health',
+                stage: 'Growth',
+                website: 'https://www.sworkit.com',
+                linkedin: 'https://www.linkedin.com/company/sworkit',
+                twitter: 'https://twitter.com/Sworkit',
+                instagram: 'https://www.instagram.com/sworkit',
+                facebook: 'https://www.facebook.com/Sworkit',
+                sector: 'Health & Fitness',
+                description: 'Digital fitness and wellness platform.',
+                highlights: [
+                    'Personalized workout plans',
+                    'Corporate wellness programs'
+                ]
+            },
+            'thrivefinancial': {
+                name: 'Thrive Financial',
+                stage: 'Growth',
+                website: 'https://thrivefinancialservices.com',
+                sector: 'Financial Services',
+                description: 'Financial services and advisory.',
+                highlights: [
+                    'Comprehensive financial planning'
+                ]
+            },
+            'camcollective': {
+                name: 'CAM Collective',
+                stage: 'Growth',
+                website: 'https://camcollective.com',
+                sector: 'Real Estate Technology',
+                description: 'Common area maintenance management platform.',
+                highlights: [
+                    'CAM reconciliation software',
+                    'Property management tools'
+                ]
+            },
+            'accelerateddental': {
+                name: 'Accelerated Dental',
+                stage: 'Growth',
+                linkedin: 'https://www.linkedin.com/company/accelerated-dental',
+                sector: 'Healthcare/Dental',
+                description: 'Dental practice management and services.',
+                highlights: [
+                    'Multi-location dental practices',
+                    'Comprehensive dental care'
+                ]
+            },
+            'haircuttery': {
+                name: 'Hair Cuttery',
+                stage: 'Growth',
+                website: 'https://www.haircuttery.com',
+                linkedin: 'https://www.linkedin.com/company/hair-cuttery',
+                facebook: 'https://www.facebook.com/HairCuttery',
+                instagram: 'https://www.instagram.com/haircuttery',
+                sector: 'Consumer Services',
+                description: 'National hair salon chain.',
+                highlights: [
+                    '500+ locations nationwide',
+                    'Family haircare services'
+                ]
+            },
+            'usinspect': {
+                name: 'US Inspect',
+                stage: 'Growth',
+                website: 'https://www.usinspect.com',
+                sector: 'Real Estate Services',
+                description: 'Home inspection services nationwide.',
+                highlights: [
+                    'Professional home inspections',
+                    'National coverage'
+                ]
+            },
+            'thecut': {
+                name: 'The Cut',
+                stage: 'Growth',
+                website: 'https://www.thecut.co',
+                sector: 'Consumer Services',
+                description: 'Modern salon and beauty services.',
+                highlights: [
+                    'Contemporary salon experience'
+                ]
+            },
+            'palisades': {
+                name: 'Palisades',
+                stage: 'Growth',
+                website: 'https://palisades.ca',
+                sector: 'Mining',
+                description: 'Mining and natural resources company.',
+                highlights: [
+                    'Natural resource development'
+                ]
+            },
+            'gcturbo': {
+                name: 'GC Turbo',
+                stage: 'Growth',
+                website: 'https://www.gcturbo.com',
+                sector: 'Manufacturing',
+                description: 'Turbocharger manufacturing and services.',
+                highlights: [
+                    'Precision turbocharger solutions',
+                    'Industrial applications'
+                ]
+            },
+            'valeo': {
+                name: 'Valeo',
+                stage: 'Growth',
+                website: 'https://www.valeo.com',
+                sector: 'Automotive',
+                description: 'Automotive supplier and technology company.',
+                highlights: [
+                    'Global automotive supplier',
+                    'Advanced vehicle systems'
+                ]
+            },
+            'nevadaking': {
+                name: 'Nevada King Gold',
+                stage: 'Growth',
+                website: 'https://nevadaking.ca',
+                sector: 'Mining',
+                description: 'Gold exploration and development company.',
+                highlights: [
+                    'Nevada gold projects',
+                    'Precious metals exploration'
+                ]
+            },
+            'entrokey': {
+                name: 'Entrokey Labs',
+                stage: 'Growth',
+                website: 'https://entrokeylabs.com',
+                sector: 'Technology',
+                description: 'Technology research and development.',
+                highlights: [
+                    'Innovative tech solutions'
+                ]
+            },
+            'mlc': {
+                name: 'Major League Cricket',
+                stage: 'Growth',
+                website: 'https://www.majorleaguecricket.com',
+                linkedin: 'https://www.linkedin.com/company/major-league-cricket',
+                twitter: 'https://twitter.com/MLCricket',
+                instagram: 'https://www.instagram.com/mlcricket',
+                facebook: 'https://www.facebook.com/MajorLeagueCricket',
+                sector: 'Sports/Entertainment',
+                description: 'Professional cricket league in the United States.',
+                highlights: [
+                    'Growing cricket in America',
+                    'T20 cricket league'
+                ]
+            },
+            'cohesity': {
+                name: 'Cohesity',
+                stage: 'Growth',
+                website: 'https://www.cohesity.com',
+                linkedin: 'https://www.linkedin.com/company/cohesity',
+                twitter: 'https://twitter.com/Cohesity',
+                sector: 'Enterprise Software',
+                description: 'Data management and security platform.',
+                highlights: [
+                    'Multi-cloud data management',
+                    'Ransomware protection',
+                    'Enterprise-scale solutions'
+                ]
+            },
+            'founderpath': {
+                name: 'FounderPath',
+                stage: 'Fund',
+                website: 'https://founderpath.com',
+                linkedin: 'https://www.linkedin.com/company/founderpath',
+                twitter: 'https://twitter.com/FounderPath',
+                sector: 'FinTech/Funding',
+                description: 'Non-dilutive growth capital for SaaS companies.',
+                highlights: [
+                    'Revenue-based financing',
+                    'No equity required',
+                    'SaaS-focused funding'
+                ]
+            },
+            'continuum': {
+                name: 'Continuum MVP',
+                stage: 'Fund',
+                website: 'https://www.continuumvp.com',
+                linkedin: 'https://www.linkedin.com/company/continuum-vp',
+                sector: 'Venture Capital',
+                description: 'Early-stage venture capital fund.',
+                highlights: [
+                    'Seed and Series A investments',
+                    'Operator-led VC'
+                ]
+            },
+            'thrive': {
+                name: 'Thrive',
+                stage: 'Fund',
+                website: 'https://www.partnerwiththrive.com',
+                linkedin: 'https://www.linkedin.com/company/thrive-capital-partners',
+                sector: 'Private Equity',
+                description: 'Private equity firm focused on lower middle market.',
+                highlights: [
+                    'Buy-and-build strategy',
+                    'Operational expertise'
+                ]
+            }
+        };
+
+        // Modal functionality
+        const modal = document.getElementById('portfolioModal');
+        const modalClose = document.getElementById('modalClose');
+        const modalCompanyName = document.getElementById('modalCompanyName');
+        const modalStage = document.getElementById('modalStage');
+        const modalBody = document.getElementById('modalBody');
+
+        function openModal(companyId) {
+            const company = companyData[companyId];
+            if (!company) {
+                // If no data, show basic modal
+                modalCompanyName.textContent = companyId.charAt(0).toUpperCase() + companyId.slice(1);
+                modalStage.textContent = 'Portfolio Company';
+                modalBody.innerHTML = `
+                    <div class="modal-detail-item">
+                        <div class="modal-detail-label">Status</div>
+                        <div class="modal-detail-value">Active portfolio company</div>
+                    </div>
+                `;
+            } else {
+                modalCompanyName.textContent = company.name;
+                modalStage.textContent = company.stage;
+                
+                let bodyHTML = '';
+                
+                if (company.founder) {
+                    bodyHTML += `
+                        <div class="modal-detail-item">
+                            <div class="modal-detail-label">Founder</div>
+                            <div class="modal-detail-value">${company.founder}</div>
+                        </div>
+                    `;
+                }
+                
+                if (company.website) {
+                    bodyHTML += `
+                        <div class="modal-detail-item">
+                            <div class="modal-detail-label">Website</div>
+                            <div class="modal-detail-value"><a href="${company.website}" target="_blank" rel="noopener">${company.website}</a></div>
+                        </div>
+                    `;
+                }
+                
+                // Social Media Links
+                const socialLinks = [];
+                if (company.linkedin) socialLinks.push(`<a href="${company.linkedin}" target="_blank" rel="noopener">LinkedIn</a>`);
+                if (company.twitter) socialLinks.push(`<a href="${company.twitter}" target="_blank" rel="noopener">X/Twitter</a>`);
+                if (company.instagram) socialLinks.push(`<a href="${company.instagram}" target="_blank" rel="noopener">Instagram</a>`);
+                if (company.facebook) socialLinks.push(`<a href="${company.facebook}" target="_blank" rel="noopener">Facebook</a>`);
+                if (company.youtube) socialLinks.push(`<a href="${company.youtube}" target="_blank" rel="noopener">YouTube</a>`);
+                
+                if (socialLinks.length > 0) {
+                    bodyHTML += `
+                        <div class="modal-detail-item">
+                            <div class="modal-detail-label">Connect</div>
+                            <div class="modal-detail-value">${socialLinks.join(' • ')}</div>
+                        </div>
+                    `;
+                }
+                
+                if (company.sector) {
+                    bodyHTML += `
+                        <div class="modal-detail-item">
+                            <div class="modal-detail-label">Sector</div>
+                            <div class="modal-detail-value">${company.sector}</div>
+                        </div>
+                    `;
+                }
+                
+                if (company.description) {
+                    bodyHTML += `
+                        <div class="modal-detail-item">
+                            <div class="modal-detail-label">About</div>
+                            <div class="modal-detail-value">${company.description}</div>
+                        </div>
+                    `;
+                }
+                
+                if (company.highlights && company.highlights.length > 0) {
+                    bodyHTML += `
+                        <div class="modal-detail-item">
+                            <div class="modal-detail-label">Key Highlights</div>
+                            <div class="modal-detail-value">
+                                <ul>
+                                    ${company.highlights.map(h => `<li>${h}</li>`).join('')}
+                                </ul>
+                            </div>
+                        </div>
+                    `;
+                }
+                
+                modalBody.innerHTML = bodyHTML;
+            }
+            
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        modalClose.addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                closeModal();
+            }
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Approach card expand/collapse
+        const approachCards = document.querySelectorAll('.approach-card');
+        approachCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const isExpanded = card.classList.contains('expanded');
+                
+                // Close all other cards
+                approachCards.forEach(c => {
+                    c.classList.remove('expanded');
+                });
+                
+                // Toggle clicked card
+                if (!isExpanded) {
+                    card.classList.add('expanded');
+                }
+            });
+        });
+
+        // Portfolio item clicks
+        const portfolioItems = document.querySelectorAll('.portfolio-item');
+        portfolioItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const companyId = item.getAttribute('data-company-id');
+                if (companyId) {
+                    openModal(companyId);
+                }
+            });
+        });
+
+        // Portfolio filtering
+        const filterButtons = document.querySelectorAll('.filter-btn');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Update active button
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                // Filter items
+                const filter = button.getAttribute('data-filter');
+                
+                portfolioItems.forEach(item => {
+                    if (filter === 'all') {
+                        item.classList.remove('hidden');
+                    } else {
+                        if (item.getAttribute('data-category') === filter) {
+                            item.classList.remove('hidden');
+                        } else {
+                            item.classList.add('hidden');
+                        }
+                    }
+                });
+            });
+        });
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
